@@ -12,6 +12,11 @@ gem 'pry'
 gem 'bcrypt'
 gem 'tux'
 
+
+group :development do
+  gem 'rufo'
+end
+
 group :test do
   gem 'rspec'
   gem 'capybara'

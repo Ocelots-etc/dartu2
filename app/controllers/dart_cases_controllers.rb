@@ -1,37 +1,37 @@
-class DartCasesControllers.rbsController < ApplicationController
+class DartCasesControllers < ApplicationController
 
-  # GET: /dart_cases.rbs
-  get "/dart_cases.rbs" do
-    erb :"/dart_cases.rbs/index.html"
+  # GET: /dart_cases
+  get "/dart_cases" do
+    erb :"/dart_cases/index.html"
   end
 
-  # GET: /dart_cases.rbs/new
-  get "/dart_cases.rbs/new" do
-    erb :"/dart_cases.rbs/new.html"
+  # GET: /dart_cases/new
+  get "/dart_cases/new" do
+    erb :"/dart_cases/new.html"
   end
 
-  # POST: /dart_cases.rbs
-  post "/dart_cases.rbs" do
-    redirect "/dart_cases.rbs"
+  # POST: /dart_cases
+  post "/dart_cases" do
+    redirect "/dart_cases"
   end
 
-  # GET: /dart_cases.rbs/5
-  get "/dart_cases.rbs/:id" do
-    erb :"/dart_cases.rbs/show.html"
+  # GET: /dart_cases/5
+  get "/dart_cases/:id" do
+    erb :"/dart_cases/show.html"
   end
 
-  # GET: /dart_cases.rbs/5/edit
-  get "/dart_cases.rbs/:id/edit" do
-    erb :"/dart_cases.rbs/edit.html"
+  # GET: /dart_cases/5/edit
+  get "/dart_cases/:id/edit" do
+    erb :"/dart_cases/edit.html"
   end
 
-  # PATCH: /dart_cases.rbs/5
-  patch "/dart_cases.rbs/:id" do
-    redirect "/dart_cases.rbs/:id"
+  # PATCH: /dart_cases/5
+  patch "/dart_cases/:id" do
+    redirect "/dart_cases/:id"
   end
 
-  # DELETE: /dart_cases.rbs/5/delete
-  delete "/dart_cases.rbs/:id/delete" do
-    redirect "/dart_cases.rbs"
+  # DELETE: /dart_cases/5/delete
+  delete "/dart_cases/:id/delete" do
+    redirect "/dart_cases"
   end
 end

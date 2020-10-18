@@ -35,3 +35,8 @@ class DartsController < ApplicationController
     redirect "/darts"
   end
 end
+
+#some functionality to add a dart to a set
+#but before actually doing that, ask if there are 3 darts in that set already
+#if so, say in a flash message "set is full!"
+#otherwise, assign the dart to that set i.e. set the set_id of the dart equal to the set.id
