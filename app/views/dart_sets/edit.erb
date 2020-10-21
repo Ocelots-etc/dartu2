@@ -1,0 +1,23 @@
+<h1>Dartsets Edit Page</h1>
+<h2>Edit Your Dart Set <%= @dart_set.name %></h2>
+
+<table>
+<span style="color:red;">
+  <%= @error_message %>
+  </span>
+  <br />
+<form action="/dart_sets/<%= @dart_set.id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH" />
+  <% @dart_set.errors.full_messages.each do |msg| %>
+    <h3><%= msg %></h3>
+  <% end %>
+  <label> Case Name: </label>
+  <input type="text" name="name" value="<%= @dart_set.name %>"> <br />
+<br />
+  <input type="submit" value="Update">
+</form>
+<form action="/dart_sets/<%= @dart_set.id %>" method="GET">
+  <input type="submit" value="Cancel">
+</form>
+</table>
+  <p><a href="/dart_sets">Back to Your Sets</a></p>

@@ -1,0 +1,30 @@
+<h1>Dart new page</h1>
+<h2>Create a New Dart Set</h2>
+
+<div class="flex-container">
+<form action="/dart_sets/<%= @dart_set.id %>/darts" method="POST">
+  <% @dart_set.errors.full_messages.each do |msg| %>
+    <p style="color:red;"><%= msg %></p>
+  <% end %>
+<span style="color:red;">
+  <%= @error_message %>
+  </span>
+  <br />
+    <label> Dart Name: </label>
+  <input type="text" name="name" value="<%= @dart.name %>"> <br />
+    <label> Dart Manufacturer: </label>
+  <input type="text" name="manufacturer" value="<%= @dart.manufacturer %>"> <br />
+    <label> Dart Condition: </label>
+  <input type="text" name="condition" value="<%= @dart.condition %>"> <br />
+    <label> Dart Body: </label>
+  <input type="text" name="body" value="<%= @dart.body %>"> <br />
+    <label> Dart Shaft: </label>
+  <input type="text" name="shaft" value="<%= @dart.shaft %>"> <br />
+    <label> Dart Flight: </label>
+  <input type="text" name="flight" value="<%= @dart.flight %>"> <br />
+</div>
+  <input type="submit" value="Create">
+</form>
+<form action="/dart_sets/<%= @dart_set.id %>" method="GET">
+  <input type="submit" value="Cancel">
+</form>

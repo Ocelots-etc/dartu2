@@ -1,0 +1,19 @@
+<h1>Dartsets index page</h1>
+<h2> These are all of your dart cases: </h2>
+<% @dart_sets.each do |dart_set| %>
+<h3>Dart Set Name: <%= dart_set.name %></h3>
+<br />
+<table>
+  <a href="/dart_sets/<%= dart_set.id %>"> View Set Contents</a>
+  <br>
+  <a href="/dart_sets/<%= dart_set.id %>/edit"> Edit Set Name</a>
+  <br>
+  <a href="/dart_sets/<%= dart_set.id %>"> Delete Set</a>
+ 
+  </table>
+  <br />
+  <br />
+<% end %>
+<p>
+<a  href="/dart_sets/new">New Dart Set</a>
+</p>

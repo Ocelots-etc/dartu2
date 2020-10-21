@@ -14,6 +14,12 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
+
+  <div id="Hello_user">
+  <% if current_user %>
+    Hi, <%= current_user.username if logged_in? %>!
+  <% end %>
+  </div>
     <div class="wrapper">
 
         <%= yield %>

@@ -1,0 +1,23 @@
+<h1>Dartsets new page</h1>
+<h2>Add a Dart Set</h2>
+<table>
+<span style="color:red;">
+  <%= @error_message %>
+  </span>
+  <br />
+<form action="/dart_sets" method="POST">
+  <label> Set Name </label>
+  <input type="text" name="name" value="<%= @dart_sets.name %>"> <br />
+  <input type="submit" value="Create">
+</form>
+<br />
+  <a href="/dart_sets"> Create New Dart Set </a>
+  
+<form action="/dart_sets" method="GET">
+  <input type="submit" value="Cancel">
+</form>
+</table>
+
+<p>
+<a href="/dart_sets"> Your Dart Sets</a>
+</p>

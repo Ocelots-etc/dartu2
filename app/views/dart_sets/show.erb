@@ -1,0 +1,32 @@
+<h1>Dart Sets show page</h1>
+<br>
+
+
+<h2><%= @dart_set.name %> Dart Set</h2>
+
+
+  <h3>
+    <img  src="../images/dartset.jpg" height="35">
+    Darts in set
+    <img  src="../images/dartset.jpg" height="35">
+  </h3>
+  <% @dart_set.darts.each_with_index do |dart, index| %>
+  <%= index + 1 %>.
+<a href="/darts/<%= dart.id%>"> <h4><%= dart.name %></h4>
+  
+  <br />
+  <br />
+  <% end %>
+
+  <p>
+    <a href="/dart_sets/<%=@dart_set.id%>/edit">Edit This Dart Set Name</a>
+    <br />
+   
+    <a href="/dart_sets/<%=@dart.id%>/darts/new">Add A New Dart</a>
+   
+    <br />
+    <a href="/dart_sets"> Your Dart Sets</a>
+  </p>
+
+  <br />
+  <br />

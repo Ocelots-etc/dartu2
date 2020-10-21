@@ -1,0 +1,35 @@
+<h1>Darts show page</h1>
+
+
+  <h2>
+    <img  src="../images/dartset.jpg" height="35">
+    <%= @dart.name %> Dart
+     <img  src="../images/dartset.jpg" height="35">
+  </h2>
+    <br />
+    Dart Manufacturer: <span><%= @dart.manufacturer %></span>
+    <br />
+    Dart Condition: <span><%= @dart.condition %></span>
+    <br />
+    Dart Body: <span><%= @dart.body %>g</span>
+    <br />
+    Dart Shaft: <span><%= @dart.shaft %></span>
+    <br />
+    Dart Flight: <span><%= @dart.flight %></span>
+    <br />
+    <br />
+    <table>
+    
+      <a href="/darts/<%= @dart.id %>/edit" class="button"> Edit </a>
+      <a href="/darts/<%= @dart.id %>" class="button"> Delete </a>
+    
+    </table>
+  <br />
+  <br />
+  <p>
+  <a href="/dart_sets/<%= @dart.dart_set_id %>">Back to your <%= @dart.dart_set.name %> set</a>
+  <br />
+  <a href="/dart_sets"> Back to all your dart sets</a>
+  </p>
+  <br />
+  <br />

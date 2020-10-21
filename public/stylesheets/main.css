@@ -13,14 +13,14 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: lightblue;
+    background-color: rgb(212, 103, 0);
     color: #333;
     font-family: Sans-Serif;
     line-height: 18px;
   }
 
   .wrapper {
-    background: #fff;
+    background: rgb(75, 121, 118);
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
@@ -113,3 +113,20 @@
     line-height: 24px;
   }
 }
+
+a:visited {
+  text-decoration: none;
+  color: rgb(124, 59, 5);
+}
+
+a:hover {
+  color: rgb(182, 118, 0);
+}
+
+a {
+  text-decoration: none;
+  color: rgb(15, 70, 1);
+}
+
+
+
