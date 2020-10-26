@@ -3,9 +3,7 @@
 
 <div class="flex-container">
 <form action="/dart_sets/<%= @dart_set.id %>/darts" method="POST">
-  <% @dart_set.errors.full_messages.each do |msg| %>
-    <p style="color:red;"><%= msg %></p>
-  <% end %>
+
 <span style="color:red;">
   <%= @error_message %>
   </span>
@@ -17,8 +15,8 @@
     <label> Dart Condition: </label>
   <input type="text" name="condition" value="<%= @dart.condition %>"> <br />
     <label> Dart Body: </label>
-  <input type="text" name="body" value="<%= @dart.body %>"> <br />
-    <label> Dart Shaft: </label>
+  <input type="number" min="18" max="50" name="body" value="<%= @dart.body %>"> <br /> 
+      <label> Dart Shaft: </label>
   <input type="text" name="shaft" value="<%= @dart.shaft %>"> <br />
     <label> Dart Flight: </label>
   <input type="text" name="flight" value="<%= @dart.flight %>"> <br />

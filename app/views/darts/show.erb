@@ -21,7 +21,13 @@
     <table>
     
       <a href="/darts/<%= @dart.id %>/edit" class="button"> Edit </a>
-      <a href="/darts/<%= @dart.id %>" class="button"> Delete </a>
+      <br>
+
+    <form method="POST" action="/darts/<%= @dart.id %>/delete" >
+        <input type="hidden" id="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Set">
+    </form>
+      
     
     </table>
   <br />

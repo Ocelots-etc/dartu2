@@ -1,36 +1,43 @@
+#@dart_set.user = current_user
 class DartSetsController < ApplicationController
-  before "/dart_sets*" do
-    redirect_if_not_logged_in
-  end
+  # before "/dart_sets*" do
+  #   redirect_if_not_logged_in
+  # end
 
   # GET: /dart_sets
   get "/dart_sets" do
-    @dart_sets = current_user.dart_sets.all
+    @dart_sets = current_user.dart_sets
     erb :"/dart_sets/index"
   end
 
   # GET: /dart_sets/new
   get "/dart_sets/new" do
-    @dart_sets = current_user.dart_sets.new
     erb :'/dart_sets/new'
   end
 
   # POST: /dart_sets
   post "/dart_sets" do
-    @dart_sets = current_user.dart_sets.new(params)
-    if @dart_sets.save
+
+    @dart_set = DartSet.new(name: params[:name], user: current_user)
+    if @dart_set.save
       redirect "/dart_sets"
     else
-      erb :'dart_sets/new'
+      'errrrrorrrrrrrrrr'
     end
   end
 
   # GET: /dart_sets/5
   get "/dart_sets/:id" do
-    @dart_set = current_user.dart_sets.find(params[:id])
-    @dart_sets = current_user.dart_sets.all
-    @darts = current_user.darts.where("dart_set_id is ?", params[:id])
-    @dart = current_user.darts.find(params[:id])
+    if logged_in?
+      if current_user.dart_sets.include?(DartSet.find(params[:id]))
+      @dart_set = DartSet.find(params[:id])
+      else
+        redirect "/dart_sets"
+      end
+    else
+      "Create a new dart set."
+      redirect "/dart_sets/new"
+    end
     erb :"/dart_sets/show"
   end
 

@@ -10,8 +10,7 @@
     Darts in set
     <img  src="../images/dartset.jpg" height="35">
   </h3>
-  <% @dart_set.darts.each_with_index do |dart, index| %>
-  <%= index + 1 %>.
+  <% @dart_set.darts.each do |dart| %>
 <a href="/darts/<%= dart.id%>"> <h4><%= dart.name %></h4>
   
   <br />
@@ -22,7 +21,7 @@
     <a href="/dart_sets/<%=@dart_set.id%>/edit">Edit This Dart Set Name</a>
     <br />
    
-    <a href="/dart_sets/<%=@dart.id%>/darts/new">Add A New Dart</a>
+    <a href="/dart_sets/<%=@dart_set.id%>/darts/new">Add A New Dart</a>
    
     <br />
     <a href="/dart_sets"> Your Dart Sets</a>

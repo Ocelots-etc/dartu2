@@ -21,7 +21,8 @@ class UsersController < ApplicationController
     if params[:username] == "" || params[:password] == ""
       redirect to '/users/new'
     else
-      @user = User.create(:username => params[:username], :password => params[:password])
+      @user = User.new(:username => params[:username], :password => params[:password])
+      @user.save
       session[:user_id] = @user.id
       redirect '/dart_sets'
     end
@@ -52,31 +53,14 @@ class UsersController < ApplicationController
   # GET: /users/5
   get "/users/:id" do
     @user = User.find(params[:id])
-    @dart_sets = @user.dart_sets 
-    @darts = @user.darts
-    erb :"/users/show"
-  end
-
-  # GET: /users/5/edit
-  get "/users/:id/edit" do
-    @user = User.find(params[:id])
-    if current_user == @user
-      erb :"/users/edit"
+    if logged_in? && current_user == @user
+      @dart_sets = @user.dart_sets 
+      @darts = @user.darts
+      erb :"/users/show"
     else
-      redirect "/users"
-    end
-  end
+      "Not your darts, no touchy!"
 
-  # PATCH: /users/5
-  patch "/users/:id" do
-    @user = User.find(params[:id])
-    if current_user == @user
-      @user.update(params.except(:id, :_method))
-      redirect "/user/:id"
-    else
-      redirect '/users'
     end
-    # redirect "/users/:id"
   end
 
   # DELETE: /users/5/delete
@@ -85,11 +69,12 @@ class UsersController < ApplicationController
     @user.delete
     redirect "/users"
   end
+  
 
   get '/logout' do
     if session[:user_id] != nil
       session.destroy
-      redirect '/login'
+      redirect '/users/login'
     else
       redirect '/'
     end

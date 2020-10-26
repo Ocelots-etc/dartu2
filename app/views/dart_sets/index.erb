@@ -8,8 +8,10 @@
   <br>
   <a href="/dart_sets/<%= dart_set.id %>/edit"> Edit Set Name</a>
   <br>
-  <a href="/dart_sets/<%= dart_set.id %>"> Delete Set</a>
- 
+  <form method="POST" action="/dart_sets/<%= dart_set.id %>/delete" >
+  <input type="hidden" id="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Set">
+  </form>
   </table>
   <br />
   <br />

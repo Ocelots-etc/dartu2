@@ -14,6 +14,7 @@ class DartsController < ApplicationController
   get "/dart_sets/:dart_set_id/darts/new" do
     @dart_set = current_user.dart_sets.find(params[:dart_set_id])
     @dart = @dart_set.darts.new
+    @error_message = "Body must be a numerical weight between 18g and 50g. Please try again."
     erb :"/darts/new"
   end
 
@@ -25,41 +26,34 @@ class DartsController < ApplicationController
       @darts.save
       redirect "/dart_sets/#{ @dart_set.id }"
     else
-      !params[:body].to_i.between?(18, 50)
-      @error_message = "Body must be a numerical weight between 18g and 50g. Please try again."
       redirect "/dart_sets/#{@dart_set.id}/darts/new"
     end
   end
 
   # GET: /darts/5
   get "/darts/:id" do
-    @user = User.find(params[:id])
-    @dart = current_user.darts.find(params[:id])
-    erb :"/darts/show"
+    if current_user
+      @dart = current_user.darts.find(params[:id])
+      erb :"/darts/show"
+    else
+      session[:error]
+      redirect "/users/login"
+    end
   end
 
   # GET: /darts/5/edit
   get "/darts/:id/edit" do
-    @dart = current_user.darts.find(params[:id])
-    if params[:body].to_i.between?(18, 50) #&& params[:body].match(/^[1-9][0-9]?$|^50$/)
-      @dart.save
-      redirect "/darts/#{ @dart.id }"
-    else 
-      !params[:body].to_i.between?(18, 50)
-      @error_message = "Body must be a numerical weight between 18g and 50g. Please try again."
+    @dart = Dart.find(params[:id])
       erb :'darts/edit'
-    end
   end
 
   # PATCH: /darts/5
   patch "/darts/:id" do
-    @dart = current_user.dart.find(params[:id])
-    if params[:body].to_i.between?(18, 50) #&& params[:body].match(/^[1-9][0-9]?$|^50$/)
-      if @darts.update(params.except(:id, :_method))
-        redirect "/darts/#{ @dart.id }"
-      end
-    else 
-      !params[:body].to_i.between?(18, 50)
+    @dart = Dart.find(params[:id])
+    if current_user.darts.include?(@dart) && params[:body].to_i.between?(18, 50)
+      @dart.update(params.except(:_method, :id))
+      redirect "/darts/#{@dart.id}"
+    else
       @error_message = "Body must be a numerical weight between 18g and 50g. Please try again."
       erb :'darts/edit'
     end
