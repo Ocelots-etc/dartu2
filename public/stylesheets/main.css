@@ -82,25 +82,9 @@
     padding-top: 20px;
   }
 
-form input[type="submit"] {
-    font-family: 'Roboto Condensed', sans-serif;
-    background: none;
-    border: none;
-    color: #fff;
-    padding: 5px 10px;
-    text-decoration: none;
-    text-transform: uppercase;
-    margin: 4px 2px;
-    cursor: pointer;
-  }
-
   form input:visited {
     text-decoration: none;
     color: rgb(124, 59, 5);
-  }
-  
-  form input:hover {
-    color: rgb(182, 118, 0);
   }
   
   form input {
@@ -111,9 +95,21 @@ form input[type="submit"] {
 }
 
 input[type="submit"] {
-  background-color: rgb(75, 121, 118);
+  font-size: 16px;
+  color: rgb(15, 70, 1);
+  background-color: transparent;
   border: 0px;
+  outline: none;
 }
+
+input[type="submit"]:hover {
+  font-size: 16px;
+  color: white; 
+  color: rgb(182, 118, 0);
+  border: 0px;
+  outline: none;
+}
+
 @media screen and (max-width: 600px) {
   .wrapper {
     -moz-box-shadow: none;
