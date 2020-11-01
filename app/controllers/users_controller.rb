@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   # GET: /users/new
   get "/users/new" do
     if logged_in?
-      redirect '/dart_sets' 
+      redirect "/users/#{current_user.id}"
     else 
       erb :'/users/new' #we'll allow them to see the signup form
     end
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       @user = User.new(:username => params[:username], :password => params[:password])
       @user.save
       session[:user_id] = @user.id
-      redirect '/dart_sets'
+      redirect "/users/#{current_user.id}"
     end
     # redirect "/users"
   end
@@ -59,17 +59,8 @@ class UsersController < ApplicationController
       erb :"/users/show"
     else
       "Not your darts, no touchy!"
-
     end
   end
-
-  # DELETE: /users/5/delete
-  delete "/users/:id/delete" do
-    @user = current_user.find(params[:id])
-    @user.delete
-    redirect "/users"
-  end
-  
 
   get '/logout' do
     if session[:user_id] != nil
