@@ -22,7 +22,7 @@ class DartSetsController < ApplicationController
     if @dart_set.save
       redirect "/dart_sets"
     else
-      'errrrrorrrrrrrrrr'
+      'oops, you made an error'
     end
   end
 
@@ -43,12 +43,13 @@ class DartSetsController < ApplicationController
 
   # GET: /dart_sets/5/edit
   get "/dart_sets/:id/edit" do
-    if current_user.dart_sets.find(params[:id])
+    @dart_set = DartSet.find(params[:id])
+    if logged_in? && current_user == @dart_set
+    # if current_user.dart_sets.find(params[:id])
       @dart_set = current_user.dart_sets.find(params[:id])
       erb :"/dart_sets/edit"
     else
-      @error = "That's not your dart set! No touchy!"
-      redirect "/dart_sets/#{@dart_set.id}/edit"
+      "That's not your dart set! No touchy!"
     end
   end
 

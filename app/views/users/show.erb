@@ -1,4 +1,4 @@
-<h2>Welcome to your dart sets viewing page, <%= @user.username %>. </h2>
+<h2>Welcome to your dart sets, <%= @user.username %>. </h2>
 
 <% @user.dart_sets.each do |dart_set| %>  
 Dart Set Name: <a href="/dart_sets/<%= dart_set.id %>"> <%= dart_set.name %> </a>

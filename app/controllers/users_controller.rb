@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   
   # GET: /users
-  get "/users" do
-    @users = User.all
-    erb :"/users/index"
-  end
+  # get "/users" do
+  #   @users = User.all
+  #   erb :"/users/index"
+  # end
 
   # GET: /users/new
   get "/users/new" do
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     if session[:user_id]
       redirect "/users/#{current_user.id}"
     else
-      erb :"users/login"  
+      erb :"users/login"
     end
   end
 
