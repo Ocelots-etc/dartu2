@@ -5,7 +5,7 @@ class DartsController < ApplicationController
 
   # GET: /darts
   get "/dart_sets/:dart_set_id/darts" do
-    @dart_set = current_user.dart_sets.find(params[:dart_set_id])
+    @dart_set = current_user.dart_sets.include?(DartSet.find(params[:id]))
     @darts = @dart_set.darts
     erb :"/darts/index"
   end

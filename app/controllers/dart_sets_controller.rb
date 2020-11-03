@@ -38,11 +38,13 @@ class DartSetsController < ApplicationController
 
   # GET: /dart_sets/5/edit
   get "/dart_sets/:id/edit" do
-    @user = User.find(params[:id])
-    if logged_in? && current_user
-    # if current_user.dart_sets.find(params[:id])
+    if logged_in? && current_user.dart_sets.include?(DartSet.find(params[:id]))
       @dart_set = DartSet.find(params[:id])
+    # if current_user.dart_sets.find(params[:id])
+    #   @dart_set = DartSet.find(params[:id])
       erb :"/dart_sets/edit"
+    else
+      redirect "/"
     end
   end
 
