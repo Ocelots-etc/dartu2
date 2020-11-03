@@ -1,5 +1,8 @@
 <h2>Welcome to your dart sets, <%= @user.username %>. </h2>
 
+<p style="color:red;"><%= @error_message %></p>
+
+<% if logged_in? && current_user == @user %>
 <% @user.dart_sets.each do |dart_set| %>  
 Dart Set Name: <a href="/dart_sets/<%= dart_set.id %>"> <%= dart_set.name %> </a>
 <br>
@@ -10,3 +13,4 @@ Dart Set Name: <a href="/dart_sets/<%= dart_set.id %>"> <%= dart_set.name %> </a
    
 
 <br>
+<% end %>

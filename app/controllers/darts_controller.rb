@@ -21,7 +21,7 @@ class DartsController < ApplicationController
   post "/dart_sets/:dart_set_id/darts" do
     @dart_set = current_user.dart_sets.find(params[:dart_set_id])
     @darts = @dart_set.darts.new(params)
-    if params[:body].to_i.between?(18, 50) #&& params[:body].match(/^[1-9][0-9]?$|^50$/)
+    if params[:body].to_i.between?(18, 50) 
       @darts.save
       redirect "/dart_sets/#{ @dart_set.id }"
     else
@@ -31,12 +31,12 @@ class DartsController < ApplicationController
 
   # GET: /darts/5
   get "/darts/:id" do
-    if current_user
-      @dart = current_user.darts.find(params[:id])
+    if current_user.darts.include?(Dart.find(params[:id]))
+    # if current_user 
+      @dart = Dart.find(params[:id])
       erb :"/darts/show"
     else
-      session[:error]
-      redirect "/users/login"
+      redirect "/"
     end
   end
 

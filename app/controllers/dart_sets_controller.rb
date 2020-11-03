@@ -17,39 +17,32 @@ class DartSetsController < ApplicationController
 
   # POST: /dart_sets
   post "/dart_sets" do
-
     @dart_set = DartSet.new(name: params[:name], user: current_user)
     if @dart_set.save
       redirect "/dart_sets"
     else
-      'oops, you made an error'
+      @error_message = "Oops, you made an error"
+      erb :"darts/show"
     end
   end
 
   # GET: /dart_sets/5
   get "/dart_sets/:id" do
-    if logged_in?
-      if current_user.dart_sets.include?(DartSet.find(params[:id]))
+    if logged_in? && current_user.dart_sets.include?(DartSet.find(params[:id]))
       @dart_set = DartSet.find(params[:id])
-      else
-        redirect "/dart_sets"
-      end
     else
-      "Create a new dart set."
-      redirect "/dart_sets/new"
+        redirect "/dart_sets"
     end
     erb :"/dart_sets/show"
   end
 
   # GET: /dart_sets/5/edit
   get "/dart_sets/:id/edit" do
-    @dart_set = DartSet.find(params[:id])
-    if logged_in? && current_user == @dart_set
+    @user = User.find(params[:id])
+    if logged_in? && current_user
     # if current_user.dart_sets.find(params[:id])
-      @dart_set = current_user.dart_sets.find(params[:id])
+      @dart_set = DartSet.find(params[:id])
       erb :"/dart_sets/edit"
-    else
-      "That's not your dart set! No touchy!"
     end
   end
 

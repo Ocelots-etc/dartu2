@@ -1,4 +1,4 @@
-# Booku
+# dartu
 
 Program description: 
 This is a web app for organizing your dart collection. Follow the links and join in creating your own virtual dart collection.

@@ -5,6 +5,7 @@
   <%= @error_message %>
   </span>
   <br />
+<% if logged_in? && current_user == @user %>
 <form action="/dart_sets/<%= @dart_set.id %>" method="POST">
   <input type="hidden" name="_method" value="PATCH" />
   <% @dart_set.errors.full_messages.each do |msg| %>
@@ -20,3 +21,5 @@
 
 </table>
   <p><a href="/dart_sets">Back to Your Sets</a></p>
+
+<%end%>

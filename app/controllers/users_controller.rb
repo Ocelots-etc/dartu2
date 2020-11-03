@@ -30,9 +30,7 @@ class UsersController < ApplicationController
   end
 
   get '/users/login' do
-  #   @error_message = session[:error]
-  #   session.delete :error
-    if session[:user_id]
+    if session[:user_id] 
       redirect "/users/#{current_user.id}"
     else
       erb :"users/login"
@@ -58,7 +56,8 @@ class UsersController < ApplicationController
       @darts = @user.darts
       erb :"/users/show"
     else
-      "Not your darts, no touchy!"
+      @error_message = "Not your darts, no touchy!"
+      erb :"/users/show"
     end
   end
 
