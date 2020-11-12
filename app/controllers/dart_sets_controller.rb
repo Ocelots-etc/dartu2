@@ -1,13 +1,14 @@
 #@dart_set.user = current_user
 class DartSetsController < ApplicationController
-  # before "/dart_sets*" do
-  #   redirect_if_not_logged_in
-  # end
 
   # GET: /dart_sets
   get "/dart_sets" do
-    @dart_sets = current_user.dart_sets
-    erb :"/dart_sets/index"
+    if logged_in? #&& current_user
+      @dart_sets = current_user.dart_sets
+      erb :"/dart_sets/index"
+    else
+      redirect "/"
+    end
   end
 
   # GET: /dart_sets/new
@@ -17,7 +18,8 @@ class DartSetsController < ApplicationController
 
   # POST: /dart_sets
   post "/dart_sets" do
-    @dart_set = DartSet.new(name: params[:name], user: current_user)
+    # @dart_set = DartSet.new(name: params[:name], user: current_user)
+    @dart_set = current_user.dart_sets.create(params)
     if @dart_set.save
       redirect "/dart_sets"
     else
@@ -28,20 +30,18 @@ class DartSetsController < ApplicationController
 
   # GET: /dart_sets/5
   get "/dart_sets/:id" do
-    if logged_in? && current_user.dart_sets.include?(DartSet.find(params[:id]))
-      @dart_set = DartSet.find(params[:id])
+    set_dart_set
+    if logged_in? && @dart_set.user == current_user      
     else
-        redirect "/dart_sets"
+        redirect "/"
     end
     erb :"/dart_sets/show"
   end
 
   # GET: /dart_sets/5/edit
   get "/dart_sets/:id/edit" do
-    if logged_in? && current_user.dart_sets.include?(DartSet.find(params[:id]))
-      @dart_set = DartSet.find(params[:id])
-    # if current_user.dart_sets.find(params[:id])
-    #   @dart_set = DartSet.find(params[:id])
+    set_dart_set
+    if logged_in? && @dart_set.user == current_user
       erb :"/dart_sets/edit"
     else
       redirect "/"
@@ -50,8 +50,9 @@ class DartSetsController < ApplicationController
 
   # PATCH: /dart_sets/5
   patch "/dart_sets/:id" do
-    @dart_set = current_user.dart_sets.find(params[:id])
-    if @dart_set.update(params.except(:id, :_method))
+    set_dart_set
+    if @dart_set.user == current_user 
+      @dart_set.update(params.except(:id, :_method))
       redirect "/dart_sets/#{@dart_set.id}"
     else
       erb :'dart_sets/edit'
@@ -60,8 +61,17 @@ class DartSetsController < ApplicationController
 
   # DELETE: /dart_sets/5/delete
   delete "/dart_sets/:id/delete" do
-    @dart_set = current_user.dart_sets.find(params[:id])
-    @dart_set.delete
-    redirect "/dart_sets"
+    set_dart_set
+    if logged_in? && @dart_set.user == current_user
+      @dart_set.destroy
+      redirect "/dart_sets"
+    else
+      redirect "/"
+    end
+  end
+
+  private 
+  def set_dart_set
+    @dart_set = DartSet.find_by(id: params[:id])
   end
 end

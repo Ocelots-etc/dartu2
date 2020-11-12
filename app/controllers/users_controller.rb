@@ -1,10 +1,4 @@
 class UsersController < ApplicationController
-  
-  # GET: /users
-  # get "/users" do
-  #   @users = User.all
-  #   erb :"/users/index"
-  # end
 
   # GET: /users/new
   get "/users/new" do
@@ -13,7 +7,6 @@ class UsersController < ApplicationController
     else 
       erb :'/users/new' #we'll allow them to see the signup form
     end
-    # erb :"/users/new"
   end
 
   # POST: /users

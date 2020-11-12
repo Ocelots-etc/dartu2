@@ -1,14 +1,4 @@
 class DartsController < ApplicationController
-  before "/darts*" do
-    redirect_if_not_logged_in
-  end
-
-  # GET: /darts
-  get "/dart_sets/:dart_set_id/darts" do
-    @dart_set = current_user.dart_sets.include?(DartSet.find(params[:id]))
-    @darts = @dart_set.darts
-    erb :"/darts/index"
-  end
 
   # GET: /darts/new
   get "/dart_sets/:dart_set_id/darts/new" do
@@ -20,9 +10,8 @@ class DartsController < ApplicationController
   # POST: /darts
   post "/dart_sets/:dart_set_id/darts" do
     @dart_set = current_user.dart_sets.find(params[:dart_set_id])
-    @darts = @dart_set.darts.new(params)
-    if params[:body].to_i.between?(18, 50) 
-      @darts.save
+    @dart = @dart_set.darts.new(params)
+      if @dart.save
       redirect "/dart_sets/#{ @dart_set.id }"
     else
       redirect "/dart_sets/#{@dart_set.id}/darts/new"
@@ -31,9 +20,7 @@ class DartsController < ApplicationController
 
   # GET: /darts/5
   get "/darts/:id" do
-    if current_user.darts.include?(Dart.find(params[:id]))
-    # if current_user 
-      @dart = Dart.find(params[:id])
+    if @dart = current_user.darts.find_by(id: params[:id])
       erb :"/darts/show"
     else
       redirect "/"
@@ -42,13 +29,14 @@ class DartsController < ApplicationController
 
   # GET: /darts/5/edit
   get "/darts/:id/edit" do
-    @dart = Dart.find(params[:id])
-      erb :'darts/edit'
+    set_dart
+    erb :'darts/edit'
   end
 
   # PATCH: /darts/5
   patch "/darts/:id" do
-    @dart = Dart.find(params[:id])
+    # @dart = Dart.find(params[:id])
+    set_dart
     if current_user.darts.include?(@dart) && params[:body].to_i.between?(18, 50)
       @dart.update(params.except(:_method, :id))
       redirect "/darts/#{@dart.id}"
@@ -60,11 +48,21 @@ class DartsController < ApplicationController
 
   # DELETE: /darts/5/delete
   delete "/darts/:id/delete" do
-    @dart = current_user.darts.find(params[:id])
-    @dart.destroy
-    redirect "/dart_sets/#{ @dart.dart_set_id }"
-    # redirect "/darts"
+    if current_user
+      set_dart
+      @dart.destroy
+      redirect "/dart_sets/#{ @dart.dart_set_id }"
+    else
+      redirect "/"
+    end
+      # redirect "/darts"
   end
+
+  private
+    def set_dart
+      @dart = Dart.find(params[:id])
+    end
+
 end
 
 #some functionality to add a dart to a set

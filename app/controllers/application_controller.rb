@@ -5,7 +5,6 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, '/public'
     set :views, 'app/views'
-    register 
     enable :sessions
     set :session_secret, "dartsaretheworldtome"
   end
@@ -15,9 +14,12 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
+    def dart
+      @dart = Dart.find(params[:id])
+    end
+
     def redirect_if_not_logged_in
       if !logged_in?
-        session[:error] = "You have to be logged in to do that"
         redirect "/users/login"
       end
     end
