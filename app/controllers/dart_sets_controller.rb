@@ -31,11 +31,11 @@ class DartSetsController < ApplicationController
   # GET: /dart_sets/5
   get "/dart_sets/:id" do
     set_dart_set
-    if logged_in? && @dart_set.user == current_user      
+    if logged_in? && @dart_set.user == current_user
+      erb :"/dart_sets/show"
     else
         redirect "/"
     end
-    erb :"/dart_sets/show"
   end
 
   # GET: /dart_sets/5/edit
